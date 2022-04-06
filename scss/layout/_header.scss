@@ -1,0 +1,15 @@
+.page-header{
+  background-color: map-get($colors,heading);
+  @include pxRem(height, 76);
+  @include pxRem(line-height, 76);
+  .header-item{
+    @include pxRem(padding, 0 18);
+    a{
+      cursor: pointer;
+      i{
+        font-size: $font-size-base;
+        @include pxRem(margin-left,15);
+      }
+    }
+  }
+}
