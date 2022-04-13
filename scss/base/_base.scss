@@ -9,6 +9,10 @@ body {
 }
 p {
   line-height: 1.45;
+  color: map-get($colors, txt-gray);
+  @include pxRem(line-height, 30);
+  @include pxRem(margin-bottom, 10);
+  @include pxRem(font-size, 16)
 }
 ul {
   list-style-type: none;

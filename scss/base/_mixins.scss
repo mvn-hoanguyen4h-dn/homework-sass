@@ -1,3 +1,49 @@
+// === RESPOND ABOVE ===
+// How to use: @include respond-above(small) {}
+@mixin respond-above($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (min-width: $breakpoint-value) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// === RESPOND BELOW ===
+// How to use: @include respond-below(small) {}
+@mixin respond-below($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  } @else {
+    @warn 'Invalid breakpoint: #{$breakpoint}.';
+  }
+}
+
+// === RESPOND BETWEEN ===
+// How to use: @include respond-between(small, medium) {};
+@mixin respond-between($lower, $upper) {
+  @if map-has-key($breakpoints, $lower) and map-has-key($breakpoints, $upper) {
+    $lower-breakpoint: map-get($breakpoints, $lower);
+    $upper-breakpoint: map-get($breakpoints, $upper);
+    @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+      @content;
+    }
+  } @else {
+    @if (map-has-key($breakpoints, $lower) == false) {
+      @warn 'Your lower breakpoint was invalid: #{$lower}.';
+    }
+    @if (map-has-key($breakpoints, $upper) == false) {
+      @warn 'Your upper breakpoint was invalid: #{$upper}.';
+    }
+  }
+}
+
+
 // === CONVERT Px To Rem === //
 // How to use: @include pxRem(font-size, 16);
 @function strip-units($number) {
@@ -98,21 +144,38 @@ $paddingOrmargin: (m: 'margin', p: 'padding');
 @include buildSpace('p'); // Padding
 
 
+// transform
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  -o-transform: $property;
+  -moz-transform: $property;
+  transform: $property;
+}
+// border
+@mixin border-radius($property) {
+  -webkit-border-radius: $property;
+  -ms-border-radius: $property;
+  -o-border-radius: $property;
+  -moz-border-radius: $property;
+  border-radius: $property;
+}
+
 // transformX
 @mixin transform-x{
+  @include transform(translateX(-50%));
   left: 50%;
-  transform: translateX(-50%);
 }
 // transformY
 @mixin transform-y{
+  @include transform(translateY(-50%));
   top: 50%;
-  transform: translateY(-50%);
 }
 // transform-center
 @mixin transform-center{
+  @include transform(translate(-50%, -50%));
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
 }
 // flex-between
 @mixin flex-between{

@@ -1,15 +1,38 @@
 .page-header{
-  background-color: map-get($colors,heading);
   @include pxRem(height, 76);
   @include pxRem(line-height, 76);
+  background-color: map-get($colors,heading);
   .header-item{
     @include pxRem(padding, 0 18);
     a{
       cursor: pointer;
       i{
+        @include pxRem(margin-left, 15);
         font-size: $font-size-base;
-        @include pxRem(margin-left,15);
       }
     }
   }
+  .header-bars{
+    i{
+      @include pxRem(font-size, 40);
+    }
+    display: inline-block;
+    display: none;
+  }
 }
+@include respond-below(large) {
+  .header-nav{
+    flex: 3;
+    justify-content: flex-end;
+  }
+  .header-list{
+    display: none;
+  }
+  .header-bars {
+    display: inline-block;
+    i{
+      @include pxRem(font-size, 40);
+    }
+  }
+
+};

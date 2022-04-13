@@ -7,7 +7,14 @@ $font-weight: (
   medium: 600,
   bold: 700
 );
-
+// == Breakpoints === //
+$breakpoints: (
+  small: 480px,
+  medium: 768px,
+  wide: 960px,
+  large: 1024px,
+  largest: 1280px
+);
 // === Colors === //
 $colors: (
   primary: #079a97,
